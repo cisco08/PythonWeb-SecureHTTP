@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SecureHTTP.js</title>
+</head>
+<body>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <!--引入AES加密库-->
+    <script src="https://cdn.bootcss.com/crypto-js/3.1.9-1/crypto-js.js"></script>
+    <!--引入RSA加密库-->
+    <script src="https://cdn.bootcss.com/jsencrypt/3.0.0-rc.1/jsencrypt.min.js"></script>
+    <!--引入加密通信封装库-->
+    <script src="./SecureHTTP.js"></script>
+    <script type="text/javascript">
+        var pubkey="-----BEGIN PUBLIC KEY-----" +
+        "\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC0nKhCfYfMYxCWI0/gMiiTxJbH" +
+        "\np73Bwff3twyh5/ygLIuSHv7UmRnljiPVG9W/OiOx9NXGldNTbSZexq3FU/PWTtPq" +
+        "\nrtwmktCTAl2kpPzYEwyQgtAOHZ4MXuuuRarXYxfcZLm4par4E5bgTzx9DTm9Egc0" +
+        "\n1uWkwg3L5bYHMlUE9wIDAQAB" +
+        "\n-----END PUBLIC KEY-----";
+        var eb = new EncryptedCommunicationBrowser(pubkey);
+
+        var post = {a:1, b:2, c:3};
+        var signIndex = [];
+        var i=0;
+        for(key in post){
+            signIndex[i]=key;
+            i++;
+        }
+        signIndex=signIndex.sort();
+        var strings='';
+        for(j=0;j<signIndex.length; j++){
+            if(j<signIndex.length-1){
+                strings += signIndex[j]+',';
+            }else {
+                strings += signIndex[j];
+            }
+        }
+        console.log(signIndex, strings);
+        $.ajax({
+            url: "http://127.0.0.1:5000/",
+            type: 'post',
+            data: eb.browserEncrypt(post, strings),
+            dataType: 'json',
+            crossDomain: true,
+            success: function(res) {
+                var resp = eb.browserDecrypt(res);
+                console.log(resp);
+            },
+            error: function(xhr) {
+                alert('出错了');
+            }
+        });
+    </script>
+</body>
+</html>
