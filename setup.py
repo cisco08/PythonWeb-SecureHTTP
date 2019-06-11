@@ -8,6 +8,12 @@ import unittest
 from setuptools import setup, Command
 
 
+def test_suite():
+    test_loader = unittest.TestLoader()
+    test_suite = test_loader.discover('tests', pattern='test_*.py')
+    return test_suite
+
+
 def _get_version():
     version_re = re.compile(r'__version__\s+=\s+(.*)')
 
@@ -57,13 +63,13 @@ class PublishCommand(Command):
     def run(self):
         """Run command."""
         os.system("pip install -U setuptools twine wheel")
-        os.system("rm -rf build/ dist/ PySecureHTTP.egg-info/")
+        os.system("rm -rf build/ dist/ Python_SecureHTTP.egg-info/")
         os.system("python setup.py sdist bdist_wheel")
         if self.test:
             os.system("twine upload --repository-url https://test.pypi.org/legacy/ dist/*")
         elif self.release:
             os.system("twine upload dist/*")
-        os.system("rm -rf build/ dist/ PySecureHTTP.egg-info/")
+        os.system("rm -rf build/ dist/ Python_SecureHTTP.egg-info/")
         if self.test:
             print("V%s publish to the test.pypi.org successfully" % version)
         elif self.release:
@@ -76,14 +82,15 @@ version = _get_version()
 setup(
     name='PySecureHTTP',
     version=version,
-    url='https://github.com/cisco08/PythonWeb-SecureHTTP/',
+    url='https://github.com/cisco08/PythonWeb-SecureHTTP',
     download_url="https://github.com/cisco08/PythonWeb-SecureHTTP/releases/tag/v%s" % version,
     license='BSD 3-Clause',
     author=author,
     author_email=email,
     keywords=["RSA", "AES", "MD5", "HTTP"],
-    description='Make HTTP transmissions more secure, encrypted communication for C/S architecture.',
+    description='Make HTTP transmissions more secure, encrypted communication for C/S B/S architecture.',
     long_description=_get_readme(),
+    test_suite='setup.test_suite',
     py_modules=['SecureHTTP', ],
     scripts=["generate_rsa_keys.sh"],
     entry_points={

@@ -1,7 +1,7 @@
-PythonWeb-SecureHTTP
+Python-SecureHTTP
 =================
 
-通过使用RSA+AES让HTTP传输更加安全，即C/S架构的加密通信!(Make HTTP transmissions more secure via RSA+AES, encrypted communication for B/S or C/S architecture.)
+通过使用RSA+AES让HTTP传输更加安全，即C/S架构的加密通信!(Make HTTP transmissions more secure via RSA+AES, encrypted communication for C/S architecture.)
 
 |Build Status| |Documentation Status| |codecov| |PyPI| |Pyversions| |Implementation| |link996|
 
@@ -15,7 +15,7 @@ PythonWeb-SecureHTTP
     # 正式版(Release)
     $ pip install -U PySecureHTTP
     # 开发版(Dev)
-    $ pip install -U git+https://github.com/cisco08/PythonWeb-SecureHTTP@master
+    $ pip install -U git+git+https://github.com/cisco08/PythonWeb-SecureHTTP@master
 
 
 **示例代码(Examples)：**
