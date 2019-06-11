@@ -17,14 +17,6 @@ PythonWeb-SecureHTTP
     # 开发版(Dev)
     $ pip install -U git+https://github.com/cisco08/PythonWeb-SecureHTTP@master
 
-**测试用例(TestCase)：**
-
-*温馨提示：运行完整测试需要php和go命令！*
-
-.. code:: bash
-
-    $ git clone https://github.com/staugur/Python-SecureHTTP && cd Python-SecureHTTP
-    $ make dev && make test
 
 **示例代码(Examples)：**
 
@@ -50,7 +42,7 @@ PythonWeb-SecureHTTP
        # 解密后的明文
        plaintext = RSADecrypt(privkey, ciphertext)
 
-3. C/S加解密示例：\ `点此查看以下模拟代码的真实WEB环境示例 <https://github.com/staugur/Python-SecureHTTP/blob/master/examples/Demo/>`__
+3. C/S加解密示例：
 
    .. code:: python
 
@@ -74,4 +66,3 @@ PythonWeb-SecureHTTP
        c2 = client.clientDecrypt(s2)
        # 以上四个步骤即完成一次请求/响应
 
-4. B/S加解密示例：\ `前端使用AES+RSA加密，后端解密 <https://github.com/staugur/Python-SecureHTTP/tree/master/examples/BS-RSA>`__
